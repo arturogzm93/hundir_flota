@@ -1,12 +1,9 @@
 import numpy as np
-from constants import tablero_j1, tablero_j2, tablero_pc1, tablero_pc2, vidas_j, vidas_pc,
+from constants import tablero_j1, tablero_j2, tablero_pc1, tablero_pc2, vidas_j, vidas_pc
 import time
-
-# pip install IPython
-'''
 from IPython.display import clear_output
 clear_output(wait=True)
-'''
+
 
 
 def iniciar_tablero():
@@ -20,8 +17,6 @@ def iniciar_tablero():
     tablero_j1[2:3, -2] = 'O'  # es 1
     tablero_j1[8:9, -1] = 'O'  # es 1
     tablero_j1[9, 8:9] = 'O'  # es 1
-
-    return tablero_j1
 
     tablero_pc1[5, 2:6] = 'O'  # eslora 4
     tablero_pc1[0:3, 8] = 'O'  # eslora 3
@@ -37,33 +32,42 @@ def iniciar_tablero():
 
 
 def buscar_coord_jug():
+
     print('TABLERO JUGADOR\n', tablero_j1)
     print('\n')
     print('TABLERO DISPAROS\n', tablero_j2)
     fila = int(input('Introducir coordenada de la fila: '))
     columna = int(input('Introducir coordenada de la columna: '))
 
-    if ct.tablero_pc1[fila, columna] == 'O':
+    salida = input('Pulsar "S" para salir')
 
-        global vidas_pc
-        vidas_pc -= 1
-        tablero_pc1[fila, columna] = 'X'
-        tablero_j2[fila, columna] = 'X'
-        print('TOCADO')
-        print(tablero_j2)
+    if salida == 'S':
 
-        clear_output()
-        buscar_coord_jug()
+        break
 
     else:
 
-        tablero_pc1[fila, columna] = 'A'
-        tablero_j2[fila, columna] = 'A'
-        print('AGUA')
-        print(tablero_j2)
+        if tablero_pc1[fila, columna] == 'O':
 
-        clear_output()
-        buscar_coord_pc()
+            global vidas_pc
+            vidas_pc -= 1
+            tablero_pc1[fila, columna] = 'X'
+            tablero_j2[fila, columna] = 'X'
+            print('TOCADO')
+            print(tablero_j2)
+
+            clear_output()
+            buscar_coord_jug()
+
+        else:
+
+            tablero_pc1[fila, columna] = 'A'
+            tablero_j2[fila, columna] = 'A'
+            print('AGUA')
+            print(tablero_j2)
+
+            clear_output()
+            buscar_coord_pc()
 
 
 def buscar_coord_pc():

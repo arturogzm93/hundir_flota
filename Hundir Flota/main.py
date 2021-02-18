@@ -1,6 +1,8 @@
 from constants import tablero_j1, tablero_j2, tablero_pc1, tablero_pc2, vidas_j, vidas_pc
 import utils as ut
-import numpy as n
+import numpy as np
+from IPython.display import clear_output
+clear_output(wait=True)
 
 print('Bienvenido a HUNDIR LA FLOTA')
 print('''Instrucciones: Los tableros están definidos.
@@ -20,7 +22,7 @@ while vidas_j > 0 or vidas_pc > 0:
     ''')
 
     entrada = int(input('Introduzca opción:'))
-    if entrada == 3:
+    if entrada == 2:
         print('¡Hasta pronto!')
         break
     elif entrada == 1:
