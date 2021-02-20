@@ -26,7 +26,15 @@ while vidas_j > 0 or vidas_pc > 0:
         print('¡Hasta pronto!')
         break
     elif entrada == 1:
-        ut.buscar_coord_jug()
+
+        print('TABLERO JUGADOR\n', tablero_j1)
+        print('\n')
+        print('TABLERO DISPAROS\n', tablero_j2)
+
+        fila = int(input('Introduce fila: '))
+        columna = int(input('Introduce columna: '))
+
+        buscar_coord(fila, columna)
 
 
 

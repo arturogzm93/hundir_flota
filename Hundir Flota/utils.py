@@ -5,7 +5,6 @@ from IPython.display import clear_output
 clear_output(wait=True)
 
 
-
 def iniciar_tablero():
     tablero_j1[0:4, 0] = 'O'  # eslora 4
     tablero_j1[2:5, 5] = 'O'  # eslora 3
@@ -31,43 +30,32 @@ def iniciar_tablero():
     tablero_pc1[4, 9] = 'O'  # es 1
 
 
-def buscar_coord_jug():
+def buscar_coord(tablero_j1, tablero_pc1, tablero_j2, vidas_pc, vidas_j):
 
     print('TABLERO JUGADOR\n', tablero_j1)
     print('\n')
     print('TABLERO DISPAROS\n', tablero_j2)
-    fila = int(input('Introducir coordenada de la fila: '))
-    columna = int(input('Introducir coordenada de la columna: '))
 
-    salida = input('Pulsar "S" para salir')
+    if tablero_pc1[fila, columna] == 'O':
 
-    if salida == 'S':
+        vidas_pc -= 1
+        tablero_pc1[fila, columna] = 'X'
+        tablero_j2[fila, columna] = 'X'
+        print('TOCADO')
+        print(tablero_j2)
 
-        break
+        clear_output()
+        buscar_coord_jug()
 
     else:
 
-        if tablero_pc1[fila, columna] == 'O':
+        tablero_pc1[fila, columna] = 'A'
+        tablero_j2[fila, columna] = 'A'
+        print('AGUA')
+        print(tablero_j2)
 
-            global vidas_pc
-            vidas_pc -= 1
-            tablero_pc1[fila, columna] = 'X'
-            tablero_j2[fila, columna] = 'X'
-            print('TOCADO')
-            print(tablero_j2)
-
-            clear_output()
-            buscar_coord_jug()
-
-        else:
-
-            tablero_pc1[fila, columna] = 'A'
-            tablero_j2[fila, columna] = 'A'
-            print('AGUA')
-            print(tablero_j2)
-
-            clear_output()
-            buscar_coord_pc()
+        clear_output()
+        buscar_coord_pc()
 
 
 def buscar_coord_pc():
