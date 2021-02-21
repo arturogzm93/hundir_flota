@@ -1,8 +1,4 @@
-import numpy as np
-from constants import tablero_j1, tablero_j2, tablero_pc1, tablero_pc2, vidas_j, vidas_pc
-import time
-from IPython.display import clear_output
-clear_output(wait=True)
+from constants import tablero_j1, tablero_pc1, tablero_j2, tablero_pc2
 
 
 def iniciar_tablero():
@@ -25,60 +21,37 @@ def iniciar_tablero():
     tablero_pc1[2:4, 1] = 'O'  # es 2
     tablero_pc1[3, -4] = 'O'  # es 1
     tablero_pc1[9, 0] = 'O'  # es 1
-    tablero_pc1[9, 0] = 'O'  # es 1
     tablero_pc1[9, 4] = 'O'  # es 1
     tablero_pc1[4, 9] = 'O'  # es 1
 
-
-def buscar_coord(tablero_j1, tablero_pc1, tablero_j2, vidas_pc, vidas_j):
-
-    print('TABLERO JUGADOR\n', tablero_j1)
-    print('\n')
-    print('TABLERO DISPAROS\n', tablero_j2)
-
-    if tablero_pc1[fila, columna] == 'O':
-
-        vidas_pc -= 1
-        tablero_pc1[fila, columna] = 'X'
-        tablero_j2[fila, columna] = 'X'
-        print('TOCADO')
-        print(tablero_j2)
-
-        clear_output()
-        buscar_coord_jug()
-
-    else:
-
-        tablero_pc1[fila, columna] = 'A'
-        tablero_j2[fila, columna] = 'A'
-        print('AGUA')
-        print(tablero_j2)
-
-        clear_output()
-        buscar_coord_pc()
+    return tablero_j1
 
 
-def buscar_coord_pc():
-    time.sleep(2)
-    fila = np.random.randint(0, 10)
-    columna = np.random.randint(0, 10)
+def buscar_coord(turno, fila, columna):
 
-    if tablero_j1[fila, columna] == 'O':
+    if turno == 'jugador_1':
 
-        global vidas_j
-        tablero_j1[fila, columna] = 'X'
-        tablero_pc2[fila, columna] = 'X'
-        print(tablero_pc2)
-        vidas_j -= 1
+        if tablero_pc1[fila, columna] == 'O':
+            tablero_j2[fila, columna] = 'X'
+            tablero_pc1[fila, columna] = 'X'
+            return 'Tocado'
 
-        clear_output()
-        buscar_coord_pc()
+        elif tablero_pc1[fila, columna] == 'A':
+            return 'Intentado'
 
-    else:
+        else:
+            tablero_j2[fila, columna] = 'A'
+            tablero_pc1[fila, columna] = 'A'
 
-        tablero_j1[fila, columna] = 'A'
-        tablero_pc2[fila, columna] = 'A'
-        print(tablero_pc2)
+    elif turno == 'pc_1':
 
-        clear_output()
-        buscar_coord_jug()
+        if tablero_j1[fila, columna] == 'O':
+            tablero_j1[fila, columna] = 'X'
+            tablero_pc2[fila, columna] = 'X'
+            return 'Tocado'
+
+        elif tablero_j1[fila, columna] == 'A':
+            return 'Intentado'
+
+        elif tablero_j1[fila, columna] == ' ':
+            return 'Agua'
