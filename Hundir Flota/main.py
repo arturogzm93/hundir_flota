@@ -1,6 +1,8 @@
 import random
 
-from utils import iniciar_tablero, buscar_coord
+import barcos
+
+from utils import iniciar_tablero, buscar_coord, activar_barcos
 
 from constants import vidas_j, vidas_pc, count, tablero_j1, tablero_j2, tablero_pc1, tablero_pc2
 
@@ -33,6 +35,7 @@ while True:
 
     elif entrada == 1:
 
+        activar_barcos()
         iniciar_tablero()
 
         while vidas_pc >= 0 or vidas_j >= 0:
