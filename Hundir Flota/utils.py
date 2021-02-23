@@ -1,36 +1,39 @@
-from constants import tablero_j1, tablero_pc1, contador
+from constants import tablero_j1, tablero_pc1
 
+def activar_barcos(contador, tablero):
 
-def activar_barcos(contador):
+    while contador < 10:
 
-    while contador <= 10:
-
-        if contador <= 3:
-            eslora1 = 1
+        if contador < 4:
+            eslora = 1
             print('Introduce un barco de una eslora.')
-            poner_barcos(eslora, contador)
+            print('contador1', contador)
+            contador = poner_barcos(eslora, contador, tablero)
 
-        elif contador <= 6:
-            eslora2 = 2
+        elif contador < 7:
+            eslora = 2
             print('Introduce un barco de dos esloras.')
-            poner_barcos(eslora, contador)
+            print('contador2', contador)
+            contador = poner_barcos(eslora, contador, tablero)
 
-        elif contador <= 8:
+        elif contador < 9:
             eslora = 3
             print('Introduce un barco de tres esloras.')
-            poner_barcos(eslora, contador)
+            print('contador3', contador)
+            contador = poner_barcos(eslora, contador, tablero)
 
-        elif contador <= 9:
+        elif contador < 10:
             eslora = 4
             print('Introduce un barco de cuatro esloras.')
-            poner_barcos(eslora, contador)
+            print('contador4', contador)
+            contador = poner_barcos(eslora, contador, tablero)
 
         else:
             print('Has puesto todos los barcos, ¡empieza la partida!')
             break
 
 
-def poner_barcos(eslora, contador):
+def poner_barcos(eslora, contador, tablero):
 
     if eslora == 1:
 
@@ -38,14 +41,16 @@ def poner_barcos(eslora, contador):
             fila = int(input('Coordenada fila: '))
             col = int(input('Coordenada columna: '))
 
-            if tablero[fila, col] = 'O'
+            if 'O' not in tablero[fila, col]:
+                tablero[fila, col] = 'O'
                 print(tablero_j1)
-                count_barcos += 1
+                contador += 1
+                print('contador11', contador)
                 return contador
-
+            else:
+                print('Ya hay un barco o te has salido del tablero.')
 
     else:
-
         while True:
             fila = int(input('Coordenada fila: '))
             col = int(input('Coordenada columna: '))
@@ -53,51 +58,56 @@ def poner_barcos(eslora, contador):
 
             orient = orient.lower()
 
-            coors_posiN = tablero_j1[fila:fila - eslora:-1, col]
-            coors_posiE = tablero_j1[fila, col: col + eslora]
-            coors_posiS = tablero_j1[fila:fila + eslora, col]
-            coors_posiO = tablero_j1[fila, col:col - eslora:-1]
+            coors_posiN = tablero[fila:fila - eslora:-1, col]
+            coors_posiE = tablero[fila, col: col + eslora]
+            coors_posiS = tablero[fila:fila + eslora, col]
+            coors_posiO = tablero[fila, col:col - eslora:-1]
 
             if (orient == 'n') and (len(coors_posiN) == eslora) and ('O' not in coors_posiN):
-                tablero_j1[fila:fila - eslora:-1, col] = 'O'
-                print(tablero_j1)
-                count_barcos += 1
-                break
+                tablero[fila:fila - eslora:-1, col] = 'O'
+                print(tablero)
+                contador += 1
+                print('contador234', contador)
+                return contador
 
             elif (orient == 'e') and (len(coors_posiE) == eslora) and ('O' not in coors_posiE):
-                tablero_j1[fila, col: col + eslora] = 'O'
-                print(tablero_j1)
-                count_barcos += 1
-                break
+                tablero[fila, col: col + eslora] = 'O'
+                print(tablero)
+                contador += 1
+                print('contador234', contador)
+                return contador
 
             elif (orient == 's') and (len(coors_posiS) == eslora) and ('O' not in coors_posiS):
-                tablero_j1[fila:fila + eslora, col] = 'O'
-                print(tablero_j1)
-                count_barcos += 1
-                break
+                tablero[fila:fila + eslora, col] = 'O'
+                print(tablero)
+                contador += 1
+                print('contador234', contador)
+                return contador
 
             elif (orient == 'o') and (len(coors_posiO) == eslora) and ('O' not in coors_posiO):
-                tablero_j1[fila, col:col - eslora:-1] = 'O'
-                print(tablero_j1)
-                count_barcos += 1
-                break
+                tablero[fila, col:col - eslora:-1] = 'O'
+                print(tablero)
+                contador += 1
+                print('contador234', contador)
+                return contador
 
             else:
                 print('Ya hay un barco o te has salido del tablero.')
+                return contador
 
 def iniciar_tablero():
 
-    tablero_j1[0:4, 0] = 'O'  # eslora 4
-    tablero_j1[2:5, 5] = 'O'  # eslora 3
-    tablero_j1[-1, 2:5] = 'O'  # eslora 3
-    tablero_j1[5, 6:8] = 'O'  # eslora 2
-    tablero_j1[-3, 4:6] = 'O'  # eslora 2
-    tablero_j1[2:4, 3] = 'O'  # es 2
-    tablero_j1[5, 2] = 'O'  # es 1
-    tablero_j1[2, -2] = 'O'  # es 1
-    tablero_j1[8, -1] = 'O'  # es 1
-    tablero_j1[9, 8] = 'O'  # es 1
-    print(tablero_j1)
+    #tablero_j1[0:4, 0] = 'O'  # eslora 4
+    #tablero_j1[2:5, 5] = 'O'  # eslora 3
+    #tablero_j1[-1, 2:5] = 'O'  # eslora 3
+    #tablero_j1[5, 6:8] = 'O'  # eslora 2
+    #tablero_j1[-3, 4:6] = 'O'  # eslora 2
+    #tablero_j1[2:4, 3] = 'O'  # es 2
+    #tablero_j1[5, 2] = 'O'  # es 1
+    #tablero_j1[2, -2] = 'O'  # es 1
+    #tablero_j1[8, -1] = 'O'  # es 1
+    #tablero_j1[9, 8] = 'O'  # es 1
+    #print(tablero_j1)
 
     tablero_pc1[5, 2:6] = 'O'  # eslora 4
     tablero_pc1[0:3, 8] = 'O'  # eslora 3

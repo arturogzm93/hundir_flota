@@ -7,7 +7,7 @@ tablero_pc2 = np.full((10, 10), ' ')
 
 vidas_j = 20
 vidas_pc = 20
-contador = 0
+contador_barcos = 0
 
 eslora_1 = 1
 eslora_2 = 2

@@ -2,7 +2,7 @@ import random
 
 from utils import iniciar_tablero, buscar_coord, activar_barcos
 
-from constants import vidas_j, vidas_pc, count, tablero_j1, tablero_j2, tablero_pc1, tablero_pc2
+from constants import vidas_j, vidas_pc, tablero_j1, tablero_j2, tablero_pc1, tablero_pc2, contador_barcos
 
 import time
 
@@ -33,7 +33,7 @@ while True:
 
     elif entrada == 1:
 
-        #activar_barcos()
+        activar_barcos(contador_barcos, tablero_j1)
         iniciar_tablero()
 
         while vidas_pc >= 0 or vidas_j >= 0:
