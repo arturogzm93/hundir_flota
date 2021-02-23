@@ -8,6 +8,8 @@ tablero_pc2 = np.full((10, 10), ' ')
 vidas_j = 20
 vidas_pc = 20
 contador_barcos = 0
+turno_j = 'jug'
+turno_pc = 'pc'
 
 eslora_1 = 1
 eslora_2 = 2

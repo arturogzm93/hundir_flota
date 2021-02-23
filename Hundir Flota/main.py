@@ -1,8 +1,7 @@
-import random
-
 from utils import iniciar_tablero, buscar_coord, activar_barcos
 
-from constants import vidas_j, vidas_pc, tablero_j1, tablero_j2, tablero_pc1, tablero_pc2, contador_barcos
+from constants import vidas_j, vidas_pc, tablero_j1, tablero_j2, tablero_pc1, tablero_pc2
+from constants import contador_barcos, turno_j, turno_pc
 
 import time
 
@@ -33,8 +32,10 @@ while True:
 
     elif entrada == 1:
 
-        activar_barcos(contador_barcos, tablero_j1)
-        iniciar_tablero()
+        activar_barcos(contador_barcos, tablero_j1, turno_j)
+        activar_barcos(contador_barcos, tablero_pc1, turno_pc)
+        # iniciar_tablero(tablero_j1, turno_j)
+        # iniciar_tablero(tablero_pc1, turno_pc)
 
         while vidas_pc >= 0 or vidas_j >= 0:
 
@@ -99,7 +100,7 @@ while True:
                                 break
 
                             elif disparo1 == 'Intentado':
-                                print('intentado ', count)
+                                print('Intentado ')
                                 continue
 
                             else:

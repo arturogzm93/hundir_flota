@@ -1,6 +1,9 @@
-from constants import tablero_j1, tablero_pc1
+import numpy as np
 
-def activar_barcos(contador, tablero):
+import random
+
+
+def activar_barcos(contador, tablero, turno):
 
     while contador < 10:
 
@@ -8,42 +11,43 @@ def activar_barcos(contador, tablero):
             eslora = 1
             print('Introduce un barco de una eslora.')
             print('contador1', contador)
-            contador = poner_barcos(eslora, contador, tablero)
+            contador = poner_barcos(eslora, contador, tablero, turno)
 
         elif contador < 7:
             eslora = 2
             print('Introduce un barco de dos esloras.')
             print('contador2', contador)
-            contador = poner_barcos(eslora, contador, tablero)
+            contador = poner_barcos(eslora, contador, tablero, turno)
 
         elif contador < 9:
             eslora = 3
             print('Introduce un barco de tres esloras.')
             print('contador3', contador)
-            contador = poner_barcos(eslora, contador, tablero)
+            contador = poner_barcos(eslora, contador, tablero, turno)
 
         elif contador < 10:
             eslora = 4
             print('Introduce un barco de cuatro esloras.')
             print('contador4', contador)
-            contador = poner_barcos(eslora, contador, tablero)
+            contador = poner_barcos(eslora, contador, tablero, turno)
 
         else:
             print('Has puesto todos los barcos, ¡empieza la partida!')
-            break
 
+def poner_barcos(eslora, contador, tablero, turno):
 
-def poner_barcos(eslora, contador, tablero):
-
-    if eslora == 1:
+    if eslora == 1 and turno == 'jug':
 
         while True:
-            fila = int(input('Coordenada fila: '))
-            col = int(input('Coordenada columna: '))
+            #fila = int(input('Coordenada fila: '))
+            #col = int(input('Coordenada columna: '))
+            current_pos = np.random.randint(10, size=2)
+            fila = current_pos[0]
+            col = current_pos[1]
 
             if 'O' not in tablero[fila, col]:
                 tablero[fila, col] = 'O'
-                print(tablero_j1)
+                print(tablero)
                 contador += 1
                 print('contador11', contador)
                 return contador
@@ -51,12 +55,25 @@ def poner_barcos(eslora, contador, tablero):
                 print('Ya hay un barco o te has salido del tablero.')
 
     else:
-        while True:
-            fila = int(input('Coordenada fila: '))
-            col = int(input('Coordenada columna: '))
-            orient = input('Coordenada N, S, E, O: ')
-
+        if turno == 'jug':
+            #fila = int(input('Coordenada fila: '))
+            #col = int(input('Coordenada columna: '))
+            #orient = input('Coordenada N, S, E, O: ')
+            #orient = orient.lower()
+            orient = random.choice(['N', 'S', 'E', 'O'])
             orient = orient.lower()
+            current_pos = np.random.randint(10, size=2)
+            fila = current_pos[0]
+            col = current_pos[1]
+
+        elif turno == 'pc':
+            orient = random.choice(['N', 'S', 'E', 'O'])
+            orient = orient.lower()
+            current_pos = np.random.randint(10, size=2)
+            fila = current_pos[0]
+            col = current_pos[1]
+
+        while True:
 
             coors_posiN = tablero[fila:fila - eslora:-1, col]
             coors_posiE = tablero[fila, col: col + eslora]
@@ -95,32 +112,37 @@ def poner_barcos(eslora, contador, tablero):
                 print('Ya hay un barco o te has salido del tablero.')
                 return contador
 
-def iniciar_tablero():
 
-    #tablero_j1[0:4, 0] = 'O'  # eslora 4
-    #tablero_j1[2:5, 5] = 'O'  # eslora 3
-    #tablero_j1[-1, 2:5] = 'O'  # eslora 3
-    #tablero_j1[5, 6:8] = 'O'  # eslora 2
-    #tablero_j1[-3, 4:6] = 'O'  # eslora 2
-    #tablero_j1[2:4, 3] = 'O'  # es 2
-    #tablero_j1[5, 2] = 'O'  # es 1
-    #tablero_j1[2, -2] = 'O'  # es 1
-    #tablero_j1[8, -1] = 'O'  # es 1
-    #tablero_j1[9, 8] = 'O'  # es 1
-    #print(tablero_j1)
+def iniciar_tablero(tablero, turno):
 
-    tablero_pc1[5, 2:6] = 'O'  # eslora 4
-    tablero_pc1[0:3, 8] = 'O'  # eslora 3
-    tablero_pc1[8, 6:9] = 'O'  # eslora 3
-    tablero_pc1[7:9, 2] = 'O'  # eslora 2
-    tablero_pc1[0, 3:5] = 'O'  # eslora 2
-    tablero_pc1[2:4, 1] = 'O'  # es 2
-    tablero_pc1[3, -4] = 'O'  # es 1
-    tablero_pc1[9, 0] = 'O'  # es 1
-    tablero_pc1[9, 4] = 'O'  # es 1
-    tablero_pc1[4, 9] = 'O'  # es 1
+    if turno == 'jug':
+        tablero[0:4, 0] = 'O'  # eslora 4
+        tablero[2:5, 5] = 'O'  # eslora 3
+        tablero[-1, 2:5] = 'O'  # eslora 3
+        tablero[5, 6:8] = 'O'  # eslora 2
+        tablero[-3, 4:6] = 'O'  # eslora 2
+        tablero[2:4, 3] = 'O'  # es 2
+        tablero[5, 2] = 'O'  # es 1
+        tablero[2, -2] = 'O'  # es 1
+        tablero[8, -1] = 'O'  # es 1
+        tablero[9, 8] = 'O'  # es 1
+        print(tablero)
+        return tablero
 
-    return tablero_j1
+    elif turno == 'pc':
+        tablero[5, 2:6] = 'O'  # eslora 4
+        tablero[0:3, 8] = 'O'  # eslora 3
+        tablero[8, 6:9] = 'O'  # eslora 3
+        tablero[7:9, 2] = 'O'  # eslora 2
+        tablero[0, 3:5] = 'O'  # eslora 2
+        tablero[2:4, 1] = 'O'  # es 2
+        tablero[3, -4] = 'O'  # es 1
+        tablero[9, 0] = 'O'  # es 1
+        tablero[9, 4] = 'O'  # es 1
+        tablero[4, 9] = 'O'  # es 1
+        print(tablero)
+        return tablero
+
 
 def buscar_coord(fila, columna, tablero_1, tablero_2):
 
@@ -142,4 +164,4 @@ def buscar_coord(fila, columna, tablero_1, tablero_2):
 
         return tablero_1, tablero_2
 
-#def reiniciar_tablero(vidas_pc, vidas_j):
+# def reiniciar_tablero(vidas_pc, vidas_j):
