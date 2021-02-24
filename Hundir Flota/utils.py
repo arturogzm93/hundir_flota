@@ -4,7 +4,6 @@ import random
 
 
 def activar_barcos(contador, tablero, turno):
-
     while contador < 10:
 
         if contador < 4:
@@ -34,13 +33,13 @@ def activar_barcos(contador, tablero, turno):
         else:
             print('Has puesto todos los barcos, ¡empieza la partida!')
 
-def poner_barcos(eslora, contador, tablero, turno):
 
+def poner_barcos(eslora, contador, tablero, turno):
     if eslora == 1 and turno == 'jug':
 
         while True:
-            #fila = int(input('Coordenada fila: '))
-            #col = int(input('Coordenada columna: '))
+            # fila = int(input('Coordenada fila: '))
+            # col = int(input('Coordenada columna: '))
             current_pos = np.random.randint(10, size=2)
             fila = current_pos[0]
             col = current_pos[1]
@@ -56,10 +55,10 @@ def poner_barcos(eslora, contador, tablero, turno):
 
     else:
         if turno == 'jug':
-            #fila = int(input('Coordenada fila: '))
-            #col = int(input('Coordenada columna: '))
-            #orient = input('Coordenada N, S, E, O: ')
-            #orient = orient.lower()
+            # fila = int(input('Coordenada fila: '))
+            # col = int(input('Coordenada columna: '))
+            # orient = input('Coordenada N, S, E, O: ')
+            # orient = orient.lower()
             orient = random.choice(['N', 'S', 'E', 'O'])
             orient = orient.lower()
             current_pos = np.random.randint(10, size=2)
@@ -114,7 +113,6 @@ def poner_barcos(eslora, contador, tablero, turno):
 
 
 def iniciar_tablero(tablero, turno):
-
     if turno == 'jug':
         tablero[0:4, 0] = 'O'  # eslora 4
         tablero[2:5, 5] = 'O'  # eslora 3
@@ -145,23 +143,18 @@ def iniciar_tablero(tablero, turno):
 
 
 def buscar_coord(fila, columna, tablero_1, tablero_2):
-
     if tablero_1[fila, columna] == 'O':
         tablero_1[fila, columna] = 'X'
         tablero_2[fila, columna] = 'X'
-        print('Tocado')
 
-        return tablero_1, tablero_2
+        return 'Tocado'
 
     elif tablero_1[fila, columna] == 'A':
 
-        print('Intentado')
+        return 'Intentado'
 
     else:
         tablero_1[fila, columna] = 'A'
         tablero_2[fila, columna] = 'A'
-        print('Agua')
 
-        return tablero_1, tablero_2
-
-# def reiniciar_tablero(vidas_pc, vidas_j):
+        return 'Agua'
