@@ -37,87 +37,92 @@ while True:
         while vidas_pc >= 0 or vidas_j >= 0:
 
             if vidas_j == 0:
-                print('Game over\n')
+                print('\nGame over...')
                 tablero_j1 = np.full((10, 10), ' ')
                 tablero_j2 = np.full((10, 10), ' ')
                 tablero_pc1 = np.full((10, 10), ' ')
                 tablero_pc2 = np.full((10, 10), ' ')
-                vidas_j = 1
-                vidas_pc = 1
+                vidas_j = 20
+                vidas_pc = 20
                 break
 
             elif vidas_pc == 0:
-                print('¡Has ganado! Fin del juego.\n')
+                print('\n¡Has ganado! Fin del juego.')
                 tablero_j1 = np.full((10, 10), ' ')
                 tablero_j2 = np.full((10, 10), ' ')
                 tablero_pc1 = np.full((10, 10), ' ')
                 tablero_pc2 = np.full((10, 10), ' ')
-                vidas_j = 1
-                vidas_pc = 1
+                vidas_j = 20
+                vidas_pc = 20
                 break
 
             else:
-                print('\n')
-                print('TURNO JUGADOR \n')
+                print('\nTURNO JUGADOR \n')
 
-                seguir = input('Si quieres seguir pulsa s, de lo contrario pulsa n: \n')
+                seguir = input('\nSi quieres seguir pulsa s, de lo contrario pulsa n: \n')
                 seguir = seguir.lower()
 
                 if seguir == 'n':
+                    tablero_j1 = np.full((10, 10), ' ')
+                    tablero_j2 = np.full((10, 10), ' ')
+                    tablero_pc1 = np.full((10, 10), ' ')
+                    tablero_pc2 = np.full((10, 10), ' ')
+                    vidas_j = 20
+                    vidas_pc = 20
                     break
 
                 elif seguir == 's':
-                    print('Tablero disparos.\n', tablero_j2)
-                    print('\n')
-                    print('Tablero barcos.\n', tablero_j1)
+                    print('Tablero barcos\n', tablero_j1)
+                    print('\nTablero disparos\n', tablero_j2)
 
                     try:
-                        fila = int(input('Introduce fila: '))
+                        fila = int(input('\nIntroduce fila: '))
                         columna = int(input('Introduce columna: '))
 
                         disparo = buscar_coord(fila, columna, tablero_pc1, tablero_j2)
 
                         if disparo == 'Tocado':
-                            print('Tablero disparos JUG\n', tablero_j2)
+                            print('\n¡¡Le has dado!!')
+                            print('\nTablero disparos', tablero_j2)
                             vidas_pc -= 1
 
                         elif disparo == 'Intentado':
-                            print('Ya has disparado ahí, vuelve a disparar.\n')
+                            print('\nYa has disparado ahí, vuelve a disparar.')
                             continue
 
                         elif disparo == 'Agua':
-                            print('¡AGUA!\n')
-                            print('Tablero disparos JUG\n', tablero_j2)
+                            print('\n¡AGUA!')
+                            print('Tablero disparos\n', tablero_j2)
 
                         while vidas_pc > 0:
 
-                            time.sleep(2)
-                            print('TURNO PC\n')
+                            print('\nTURNO PC')
+                            time.sleep(3)
 
-                            fila = int(input('Introduce fila: '))
-                            columna = int(input('Introduce columna: '))
+                            fila = np.random.randint(10)
+                            columna = np.random.randint(10)
 
                             disparo1 = buscar_coord(fila, columna, tablero_j1, tablero_pc2)
 
                             if disparo1 == 'Tocado':
-                                print('Tablero barcos JUG\n', tablero_j1)
+                                print('\n¡¡Te ha dado!!')
                                 vidas_j -= 1
                                 break
 
                             elif disparo1 == 'Intentado':
-                                print('Ya has disparado ahí, vuelve a disparar.\n')
+                                print('\nYa has disparado ahí, vuelve a disparar.')
                                 continue
 
                             elif disparo1 == 'Agua':
-                                print('Tablero barcos JUG\n', tablero_j1)
+                                print('\n¡Ha fallado el disparo!')
                                 break
 
                     except ValueError:
-                        print('Has introducido una fila o columna no válida,\
+                        print('\nHas introducido una fila o columna no válida,\
                          vuelve a introducirlas.')
                     except IndexError:
-                        print('Has introducido una fila o columna no válida,\
+                        print('\nHas introducido una fila o columna no válida,\
                          vuelve a introducirlas.')
 
     except ValueError:
-        print('Has escrito una opción no válida. Introduce 1 o 2.')
+        print('\nHas escrito una opción no válida. Introduce 1 o 2.')
