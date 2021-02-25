@@ -51,6 +51,10 @@ def activar_barcos(contador, tablero, turno):
             except ValueError:
                 print('\nCoordenada mal introducida, vuelve a intentarlo.\n')
                 continue
+            except IndexError:
+                print('\nCoordenada mal introducida, vuelve a intentarlo.\n')
+                continue
+
 
         elif turno == 'pc':
             if contador < 4:

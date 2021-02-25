@@ -20,10 +20,10 @@ while True:
 
     try:
 
-        entrada = int(input('Introduzca opción:\n'))
+        entrada = int(input('\nIntroduzca opción: '))
 
         if entrada == 2:
-            print('¡Hasta pronto!\n')
+            print('\n¡Hasta pronto!')
             break
 
         elif entrada == 1:
@@ -31,7 +31,7 @@ while True:
             activar_barcos(contador_barcos, tablero_pc1, turno_pc)
 
         else:
-            print('La opción no es válida.\n')
+            print('\nLa opción no es válida.')
             continue
 
         while vidas_pc >= 0 or vidas_j >= 0:
@@ -57,9 +57,9 @@ while True:
                 break
 
             else:
-                print('\nTURNO JUGADOR \n')
+                print('\nTURNO JUGADOR')
 
-                seguir = input('\nSi quieres seguir pulsa s, de lo contrario pulsa n: \n')
+                seguir = input('\nSi quieres seguir pulsa s, de lo contrario pulsa n: ')
                 seguir = seguir.lower()
 
                 if seguir == 'n':
@@ -72,7 +72,6 @@ while True:
                     break
 
                 elif seguir == 's':
-                    print('Tablero barcos\n', tablero_j1)
                     print('\nTablero disparos\n', tablero_j2)
 
                     try:
@@ -83,16 +82,17 @@ while True:
 
                         if disparo == 'Tocado':
                             print('\n¡¡Le has dado!!')
-                            print('\nTablero disparos', tablero_j2)
+                            print('\nTablero disparos\n', tablero_j2)
                             vidas_pc -= 1
+                            continue
 
                         elif disparo == 'Intentado':
-                            print('\nYa has disparado ahí, vuelve a disparar.')
+                            print('\nYa has disparado en esa coordenada, vuelve a disparar.')
                             continue
 
                         elif disparo == 'Agua':
                             print('\n¡AGUA!')
-                            print('Tablero disparos\n', tablero_j2)
+                            print('\nTablero disparos\n', tablero_j2)
 
                         while vidas_pc > 0:
 
@@ -106,23 +106,25 @@ while True:
 
                             if disparo1 == 'Tocado':
                                 print('\n¡¡Te ha dado!!')
+                                print('\nTablero barcos\n', tablero_j1)
                                 vidas_j -= 1
-                                break
+                                continue
 
                             elif disparo1 == 'Intentado':
-                                print('\nYa has disparado ahí, vuelve a disparar.')
+                                print('Ya había disparado en esa coordenada, le vuelve a tocar.')
                                 continue
 
                             elif disparo1 == 'Agua':
                                 print('\n¡Ha fallado el disparo!')
+                                print('\nTablero barcos\n', tablero_j1)
                                 break
 
                     except ValueError:
-                        print('\nHas introducido una fila o columna no válida,\
-                         vuelve a introducirlas.')
+                        print('\nHas introducido una fila o columna no válida, ' +
+                                'vuelve a introducirlas.')
                     except IndexError:
-                        print('\nHas introducido una fila o columna no válida,\
-                         vuelve a introducirlas.')
+                        print('\nHas introducido una fila o columna no válida, ' +
+                                'vuelve a introducirlas.')
 
     except ValueError:
         print('\nHas escrito una opción no válida. Introduce 1 o 2.')
