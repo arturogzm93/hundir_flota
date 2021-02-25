@@ -1,6 +1,6 @@
 # ***PROYECTO HUNDIR LA FLOTA***
 
-![imagen](hundir-la-flota-juego-de-mesa.jpg)
+![imagen](./img/hundir-la-flota-juego-de-mesa.jpg)
 
 ## Autores
 
